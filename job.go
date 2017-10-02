@@ -90,7 +90,10 @@ type JobResponse struct {
 	UpstreamProjects []InnerJob  `json:"upstreamProjects"`
 	URL              string      `json:"url"`
 	Jobs             []InnerJob  `json:"jobs"`
-	PrimaryView      *ViewData   `json:"primaryView"`
+	PrimaryView      struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"primaryView"`
 	Views            []ViewData  `json:"views"`
 }
 
