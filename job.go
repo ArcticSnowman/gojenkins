@@ -501,8 +501,11 @@ func (j *Job) Invoke(files []string, skipIfRunning bool, params map[string]strin
 	if securityToken != "" {
 		reqParams["token"] = securityToken
 	}
-
-	buildParams["json"] = string(makeJson(params))
+	//Merge params into reqParams
+	for k,v := range params {
+		reqParams[k] = v
+	}
+	//buildParams["json"] = string(makeJson(params))
 	b, _ := json.Marshal(buildParams)
 	resp, err := j.Jenkins.Requester.PostFiles(j.Base+base, bytes.NewBuffer(b), nil, reqParams, files)
 	if err != nil {
